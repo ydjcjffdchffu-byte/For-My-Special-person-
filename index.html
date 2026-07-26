@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Birthday Countdown</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+
+body{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    overflow:hidden;
+
+    background:linear-gradient(135deg,#090014,#1b0033,#000428);
+
+    color:white;
+
+}
+
+
+/* Countdown Box */
+
+.count-box{
+
+    width:90%;
+
+    max-width:600px;
+
+    padding:30px;
+
+    text-align:center;
+
+    background:rgba(255,255,255,0.12);
+
+    border-radius:25px;
+
+    border:1px solid rgba(255,255,255,0.3);
+
+    backdrop-filter:blur(15px);
+
+    box-shadow:0 0 35px rgba(255,0,150,0.4);
+
+}
+
+
+.count-box h1{
+
+    color:#ffd166;
+
+    font-size:35px;
+
+    margin-bottom:20px;
+
+}
+
+
+.counter{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+}
+
+
+.time{
+
+    background:rgba(255,255,255,0.15);
+
+    padding:15px;
+
+    border-radius:15px;
+
+    min-width:80px;
+
+}
+
+
+.time span{
+
+    font-size:30px;
+
+    font-weight:bold;
+
+}
+
+
+.time p{
+
+    color:#ddd;
+
+    margin-top:5px;
+
+}
+
+
+/* Heart Rain */
+
+
+.heart{
+
+    position:fixed;
+
+    top:-20px;
+
+    color:#ff4d8d;
+
+    font-size:20px;
+
+    animation:fall linear infinite;
+
+    z-index:-1;
+
+}
+
+
+@keyframes fall{
+
+    from{
+
+        transform:translateY(-10vh);
+
+        opacity:1;
+
+    }
+
+
+    to{
+
+        transform:translateY(110vh);
+
+        opacity:0;
+
+    }
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="count-box">
+
+
+<h1>🎂 Birthday Countdown</h1>
+
+
+<div class="counter">
+
+
+<div class="time">
+<span id="days">0</span>
+<p>Days</p>
+</div>
+
+
+<div class="time">
+<span id="hours">0</span>
+<p>Hours</p>
+</div>
+
+
+<div class="time">
+<span id="minutes">0</span>
+<p>Minutes</p>
+</div>
+
+
+<div class="time">
+<span id="seconds">0</span>
+<p>Seconds</p>
+</div>
+
+
+<div class="time">
+<span id="milliseconds">0</span>
+<p>MS</p>
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
+// Birthday Date
+
+const birthday = new Date("August 2, 2026 00:00:00").getTime();
+
+
+
+function countdown(){
+
+
+const now = new Date().getTime();
+
+
+const distance = birthday - now;
+
+
+
+const days = Math.floor(distance/(1000*60*60*24));
+
+
+const hours = Math.floor(
+(distance%(1000*60*60*24))/(1000*60*60)
+);
+
+
+
+const minutes = Math.floor(
+(distance%(1000*60*60))/(1000*60)
+);
+
+
+
+const seconds = Math.floor(
+(distance%(1000*60))/1000
+);
+
+
+
+const milliseconds = distance % 1000;
+
+
+
+document.getElementById("days").innerHTML=days;
+
+document.getElementById("hours").innerHTML=hours;
+
+document.getElementById("minutes").innerHTML=minutes;
+
+document.getElementById("seconds").innerHTML=seconds;
+
+document.getElementById("milliseconds").innerHTML=milliseconds;
+
+
+}
+
+
+
+setInterval(countdown,10);
+
+countdown();
+
+
+
+
+
+// Heart Rain
+
+
+function createHeart(){
+
+
+const heart=document.createElement("div");
+
+
+heart.className="heart";
+
+
+heart.innerHTML="❤️";
+
+
+heart.style.left=Math.random()*100+"vw";
+
+
+heart.style.fontSize=
+(15+Math.random()*25)+"px";
+
+
+
+heart.style.animationDuration=
+(3+Math.random()*5)+"s";
+
+
+
+document.body.appendChild(heart);
+
+
+
+setTimeout(()=>{
+
+heart.remove();
+
+},8000);
+
+
+
+}
+
+
+
+setInterval(createHeart,300);
+
+
+
+</script>
+
+
+</body>
+</html>
